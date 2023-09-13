@@ -1,14 +1,13 @@
 package com.lockedme;
 
-import com.lockedme.operations.BusinessOperations;
-import com.lockedme.utils.FileUtility;
+import com.lockedme.operations.BusinessOperationsMenu;
+import com.lockedme.utils.ListFiles;
 import com.lockedme.config.Config;
 import com.lockedme.exception.MenuInputException;
 import java.io.File;
 
 public class MainApplication {
 
-    // Constants for menu options
     private static final int OPTION_LIST_FILES = 1;
     private static final int OPTION_BUSINESS_OPERATIONS = 2;
     private static final int OPTION_EXIT = 3;
@@ -17,6 +16,7 @@ public class MainApplication {
         ensureDirectoryExists();
         WelcomeScreen.display();
         mainMenu();
+        Config.SCANNER.close();
     }
 
     private static void ensureDirectoryExists() {
@@ -26,8 +26,18 @@ public class MainApplication {
         }
     }
 
+    private static void displayMainMenuOptions() {
+        System.out.println("\n\t---------");
+        System.out.println("\tMAIN MENU");
+        System.out.println("\t---------");
+        System.out.println("\t" + OPTION_LIST_FILES + ". List files in ascending order");
+        System.out.println("\t" + OPTION_BUSINESS_OPERATIONS + ". Business-level operations");
+        System.out.println("\t" + OPTION_EXIT + ". Close the application\n");
+        System.out.print("	Enter your choice: ");
+    }
+    
     private static void mainMenu() {
-    	 BusinessOperations businessOperations = new BusinessOperations();
+    	 BusinessOperationsMenu businessOperations = new BusinessOperationsMenu();
     	 
         while (true) {
             displayMainMenuOptions();
@@ -43,7 +53,7 @@ public class MainApplication {
 
                 switch (choice) {
                     case OPTION_LIST_FILES:
-                        FileUtility.listFiles();
+                        ListFiles.listFiles();
                         break;
                     case OPTION_BUSINESS_OPERATIONS:
                         businessOperations.menu();
@@ -64,18 +74,6 @@ public class MainApplication {
                 }
             }
         }
-    }
-
-
-
-    private static void displayMainMenuOptions() {
-        System.out.println("\n\t---------");
-        System.out.println("\tMAIN MENU");
-        System.out.println("\t---------");
-        System.out.println("\t" + OPTION_LIST_FILES + ". List files in ascending order");
-        System.out.println("\t" + OPTION_BUSINESS_OPERATIONS + ". Business-level operations");
-        System.out.println("\t" + OPTION_EXIT + ". Close the application\n");
-        System.out.print("	Enter your choice: ");
     }
 
     private static void exitApplication() {

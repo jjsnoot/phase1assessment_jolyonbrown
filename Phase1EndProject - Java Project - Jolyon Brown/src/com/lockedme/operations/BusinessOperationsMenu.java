@@ -3,9 +3,9 @@ package com.lockedme.operations;
 import com.lockedme.config.Config;
 import com.lockedme.exception.MenuInputException;
 
-public class BusinessOperations {
+public class BusinessOperationsMenu {
 
-    private FileOperation fileOperation = new FileOperation(Config.ROOT_DIR);
+    private FileOperations fileOperation = new FileOperations(Config.ROOT_DIR);
 
     private void displayBusinessOperationsMenu() {
     	System.out.println("\n\t\t--------------------");
@@ -56,5 +56,3 @@ public class BusinessOperations {
         }
     }
 }
-
-

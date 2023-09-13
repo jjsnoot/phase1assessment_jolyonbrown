@@ -4,7 +4,7 @@ import com.lockedme.config.Config;
 import java.io.File;
 import java.util.Arrays;
 
-public class FileUtility {
+public class ListFiles {
 
     public static void listFiles() {
         File directory = new File(Config.ROOT_DIR);
