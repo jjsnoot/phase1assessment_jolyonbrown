@@ -8,17 +8,23 @@ import java.io.File;
 
 public class MainApplication {
 
+    // constants for menu options
     private static final int OPTION_LIST_FILES = 1;
     private static final int OPTION_BUSINESS_OPERATIONS = 2;
     private static final int OPTION_EXIT = 3;
 
     public static void main(String[] args) {
+        // ensure root directory exists
         ensureDirectoryExists();
+        // display welcome screen
         WelcomeScreen.display();
+        // load  main menu
         mainMenu();
+        // close the scanner 
         Config.SCANNER.close();
     }
 
+    // check and create root directory if needed
     private static void ensureDirectoryExists() {
         File dir = new File(Config.ROOT_DIR);
         if (!dir.exists()) {
@@ -26,6 +32,7 @@ public class MainApplication {
         }
     }
 
+    // display main menu 
     private static void displayMainMenuOptions() {
         System.out.println("\n\t---------");
         System.out.println("\tMAIN MENU");
@@ -36,9 +43,10 @@ public class MainApplication {
         System.out.print("	Enter your choice: ");
     }
     
+    // main menu logic
     private static void mainMenu() {
-    	 BusinessOperationsMenu businessOperations = new BusinessOperationsMenu();
-    	 
+        BusinessOperationsMenu businessOperations = new BusinessOperationsMenu();
+         
         while (true) {
             displayMainMenuOptions();
 
@@ -53,12 +61,15 @@ public class MainApplication {
 
                 switch (choice) {
                     case OPTION_LIST_FILES:
+                        // list files in root directory
                         ListFiles.listFiles();
                         break;
                     case OPTION_BUSINESS_OPERATIONS:
+                        // go to business operations
                         businessOperations.menu();
                         break;
                     case OPTION_EXIT:
+                        // exit the application
                         exitApplication();
                         break;
                     default:
@@ -76,10 +87,11 @@ public class MainApplication {
         }
     }
 
+    // display exit message and exit the program
     private static void exitApplication() {
-        System.out.println("\n------------------------------------------");
-        System.out.println("Thank you for using LockedMe.com. Goodbye!");
-        System.out.println("------------------------------------------");
+        System.out.println("\n\t---------------------------------");
+        System.out.println("\tExiting the Application. Goodbye!");
+        System.out.println("\t---------------------------------");
         System.exit(0);
     }
 }

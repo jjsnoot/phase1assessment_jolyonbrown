@@ -8,27 +8,29 @@ public class FileOperations {
 
     private String rootDir;
 
+    // initialise rootDir
     public FileOperations(String rootDir) {
         this.rootDir = rootDir;
     }
 
-    // Helper method to get a file name from the user
+    // prompt for file name
     private String promptForFileName(String promptMessage) {
         System.out.print("\t\t" + promptMessage);
         return Config.SCANNER.nextLine().trim();
     }
 
-    // Helper method to get a File object based on the file name
+    // return a File object from file name
     private File getFile(String fileName) {
         return new File(rootDir + fileName);
     }
 
+    // add a file to root directory
     public void addFile() {
-        System.out.print("\t\tEnter the name of the file to add: ");
-        String fileName = Config.SCANNER.nextLine();
+        String fileName = promptForFileName("Enter the name of the file to add: ");
         File directory = new File(rootDir);
         File[] fileList = directory.listFiles();
         
+        // check if file exists
         if (fileList != null) {
             for (File file : fileList) {
                 if (file.getName().equalsIgnoreCase(fileName)) {
@@ -38,6 +40,7 @@ public class FileOperations {
             }
         }
 
+        // create new file
         File newFile = getFile(fileName);
         try {
             if (newFile.createNewFile()) {
@@ -48,7 +51,7 @@ public class FileOperations {
         }
     }
 
-
+    // delete file from directory
     public void deleteFile() {
         String fileName = promptForFileName("Enter the name of the file to delete: ");
         File file = getFile(fileName);
@@ -63,6 +66,7 @@ public class FileOperations {
         }
     }
 
+    // search for file in root directory
     public void searchFile() {
         String fileName = promptForFileName("Enter the name of the file to search:");
         File file = getFile(fileName);
